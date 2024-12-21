@@ -2,7 +2,6 @@
     <h2 class="text-xl font-bold mb-4">
         {{$title}}
     </h2>
-    <div id="inputForm" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
         <div class="bg-white p-6 w-1/2 rounded-lg shadow-lg">
             <form action="#" method="POST" enctype="multipart/form-data">
                 <div class="grid grid-cols-2 gap-4">
@@ -45,5 +44,4 @@
                 </div>
             </form>
         </div>
-    </div>
 </x-admin-layout>

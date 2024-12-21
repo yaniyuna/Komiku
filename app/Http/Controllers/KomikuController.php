@@ -29,15 +29,15 @@ class KomikuController extends Controller
         return view('BackPage.dataKomiku', compact('title', 'komiks'));
     }
 
-    public function index2()
-    {
+    // public function index2()
+    // {
 
-        $title = 'Data User';
-        $users = User::all();
-        // $users = User::paginate(2);
+    //     $title = 'Data User';
+    //     $users = User::all();
+    //     // $users = User::paginate(2);
         
-        return view('BackPage.dataUser', compact('title', 'users' ));
-    }
+    //     return view('BackPage.dataUser', compact('title', 'users' ));
+    // }
 
     public function index3()
     {

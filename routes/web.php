@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KomikuController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,7 +46,7 @@ Route::get('/admin', [KomikuController::class, 'index'])->name('data komiku');
 Route::get('/datauser', [KomikuController::class, 'index2'])->name('data user');
 Route::get('/datatransaksi', [KomikuController::class, 'index3'])->name('data transaksi');
 Route::get('/tambahKomik', [KomikuController::class, 'create'])->name('tambah komik');
-
+Route::get('/tambahUser', [UserController::class, 'create'])->name('tambah user');
 
 
 Route::get('/', [HomeController::class, 'index'])->name('landing');

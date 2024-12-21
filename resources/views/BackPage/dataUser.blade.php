@@ -13,7 +13,6 @@
                     <th class="px-4 py-2">Email</th>
                     <th class="px-4 py-2">Password</th>
                     <th class="px-4 py-2">Role</th>
-                    {{-- <th class="px-4 py-2">Status</th> --}}
                     <th class="px-4 py-2 text-center">Aksi</th>
                 </tr>
             </thead>
@@ -25,7 +24,6 @@
                         <td class="px-4 py-2">{{ $item->email }}</td>
                         <td class="px-4 py-2">{{ $item->password }}</td>
                         <td class="px-4 py-2">{{ $item->role }}</td>
-                        {{-- <td class="px-4 py-2">Aktif</td> --}}
                         <td class="px-4 py-2 text-center">
                             <button class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600">Edit</button>
                             <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</button>
@@ -35,7 +33,7 @@
             </tbody>
         </table>
         <button id="toggleForm" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-            <a href="#">Tambah User</a> 
+            <a href="{{ route('tambah user') }}">Tambah User</a> 
         </button>
     </div>
 
