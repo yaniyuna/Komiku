@@ -17,7 +17,7 @@
         <h2 class="text-2xl font-bold text-center mb-6">Komikku</h2>
         <ul class="space-y-4">
             <li><a href="{{ route('data komiku') }}" class="block text-gray-300 hover:text-white">Data Komiku</a></li>
-            <li><a href="{{ route('data user') }}" class="block text-gray-300 hover:text-white">Data User</a></li>
+            <li><a href="{{ route('data pesanan') }}" class="block text-gray-300 hover:text-white">Data User</a></li>
             <li><a href="{{ route('data transaksi') }}" class="block text-gray-300 hover:text-white">Data Transaksi</a></li>
         </ul>
     </div>

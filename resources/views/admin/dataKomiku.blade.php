@@ -14,9 +14,9 @@
                     <th class="px-4 py-2">Penulis</th>
                     <th class="px-4 py-2">Kategori</th>
                     <th class="px-4 py-2">Tahun Terbit</th>
+                    <th class="px-4 py-2">Sinopsis</th>
                     <th class="px-4 py-2">Harga</th>
                     <th class="px-4 py-2">Stok</th>
-                    <th class="px-4 py-2">Sinopsis</th>
                     <th class="px-4 py-2">Gambar</th>
                     <th class="px-4 py-2 text-center">Aksi</th>
                 </tr>
@@ -29,16 +29,23 @@
                         <td class="px-4 py-2">{{ $item->penulis }}</td>
                         <td class="px-4 py-2">{{ $item->kategori }}</td>
                         <td class="px-4 py-2">{{ $item->thn_terbit }}</td>
+                        <td class="px-4 py-2">{{ $item->sinopsis }}</td>
                         <td class="px-4 py-2">{{ $item->harga }}</td>
                         <td class="px-4 py-2">{{ $item->stok }}</td>
-                        <td class="px-4 py-2">{{ $item->sinopsis }}</td>
                         <td class="px-4 py-2">
-                            <img src="{{ asset($item->feature_img) }}" alt="One Piece" class="w-16 h-16 object-cover">
+                            <img src="{{ asset($item->feature_img) }}" alt="" class="w-16 h-16 object-cover">
                         </td>
+
+
                         <td class="px-4 py-2 text-center">
                             <div class="flex justify-center space-x-2">
-                                <button class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600">Edit</button>
-                                <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</button>
+                                <form action="{{ route('admin.destroy', $item->id_komik) }}" method="POST">
+                                    @csrf @method('DELETE')
+                                    <button class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600">
+                                        <a href="{{ route('admin.edit', $item->id_komik) }}">Edit</a>
+                                    </button>
+                                    <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600" onclick="return confirm('Anda Yakin?')" type="submit">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -46,11 +53,11 @@
             </tbody>
         </table>
         <button id="toggleForm" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-            <a href="{{ route('tambah komik') }}">Tambah Komik</a>
+            <a href="{{ route('admin.create') }}">Tambah Komik</a>
         </button>
     </div>
 
-    <div class="m-4">{{ $komiks->links() }}</div>
+    {{-- <div class="m-4">{{ $komiks->links() }}</div> --}}
 
     <!-- Hidden Overlay Form -->
     {{-- <div id="inputForm" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">

@@ -14,30 +14,13 @@ class KomikuController extends Controller
      */
     public function index()
     {
-        //
-        // $komik=[(object)[
-        //     'id_komik' =>1,
-        //     'judul'=> 'Naruto',
-        //     'kategori'=> 'Action',
-        //     'stok' =>'20'
-        // ]];
         $title = 'Data Komiku';
         $komiks = new Komik;
         $komiks = Komik::all();
-        $komiks = Komik::paginate(2);
+        // $komiks = Komik::paginate(2);
         // $komik=collect($komik);
-        return view('BackPage.dataKomiku', compact('title', 'komiks'));
+        return view('admin.dataKomiku', compact('title', 'komiks'));
     }
-
-    // public function index2()
-    // {
-
-    //     $title = 'Data User';
-    //     $users = User::all();
-    //     // $users = User::paginate(2);
-        
-    //     return view('BackPage.dataUser', compact('title', 'users' ));
-    // }
 
     public function index3()
     {
@@ -46,7 +29,7 @@ class KomikuController extends Controller
         $transaksis = Transaksi::all();
         // $transaksis = Transaksi::paginate(2);
         
-        return view('BackPage.dataTransaksi', compact('title', 'transaksis'));
+        return view('admin.dataTransaksi', compact('title', 'transaksis'));
     }
 
 
@@ -58,7 +41,7 @@ class KomikuController extends Controller
         //
         $title = "Input Komik";
         $komiks = Komik::all();
-        return view('BackPage.tambahKomik', compact('title', 'komiks'));
+        return view('admin.tambahKomik', compact('title', 'komiks'));
     }
 
     /**
@@ -67,6 +50,32 @@ class KomikuController extends Controller
     public function store(Request $request)
     {
         //
+        $messages = [
+            'required' => 'Kolom : Atribut harus lengkap',
+            'numeric' => 'Kolom : Atribut harus angka',
+            'file' => 'Perhatikan format dan ukuran file', 
+        ];
+
+        $validasi=$request->validate([
+            'judul'=> 'required',
+            'penulis' => 'required',
+            'kategori' => 'required',
+            'thn_terbit' => 'required',
+            'sinopsis' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
+            'feature_img' => 'required|mimes:png,jpg|max:1024'
+        ], $messages);
+        try{
+            $fileName = time().$request->file('feature_img')->getClientOriginalName();
+            $path = $request->file('feature_img')->storeAs('uploads/komiks', $fileName);
+            $validasi['feature_img'] = $path;
+            $response=Komik::create($validasi);
+            return redirect()->route('admin.index')->with('success', 'Data berhasil disimpan!');
+        }
+        catch(\Exception $e){
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -83,6 +92,16 @@ class KomikuController extends Controller
     public function edit(string $id)
     {
         //
+        $title="Edit Data";
+        // $komiks=Komik::all();
+        $komiks=Komik::where('id_komik', $id)->first();
+        if($komiks != NULL){
+            $title="Edit Data".$komiks->id_komik;
+            return view('admin.tambahKomik', compact('title', 'komiks'));
+        }
+        else{
+            return view('admin.dataKomiku', compact('title', 'komiks'));
+        }
     }
 
     /**
@@ -91,6 +110,35 @@ class KomikuController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $messages = [
+            'required' => 'Kolom : Atribut harus lengkap',
+            'numeric' => 'Kolom : Atribut harus angka',
+            'file' => 'Perhatikan format dan ukuran file', 
+        ];
+
+        $validasi=$request->validate([
+            'judul'=> 'required',
+            'penulis' => 'required',
+            'kategori' => 'required',
+            'thn_terbit' => 'required',
+            'sinopsis' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
+            'feature_img' => 'mimes:png,jpg|max:1024'
+            // 'feature_img' => ''
+        ]);
+        try{
+            if($request->file('feature_img')){
+                $fileName = time().$request->file('feature_img')->getClientOriginalName();
+                $path = $request->file('feature_img')->storeAs('uploads/komiks', $fileName);
+                $validasi['feature_img'] = $path;
+            }
+            $response=Komik::where('id_komik', $id)->update($validasi);
+            return redirect()->route('admin.index')->with('success', 'Data berhasil disimpan!');
+        }
+        catch(\Exception $e){
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -99,5 +147,19 @@ class KomikuController extends Controller
     public function destroy(string $id)
     {
         //
+        try{
+            $komiks=Komik::find($id);
+            if($komiks != NULL){
+                $komiks->delete();
+                return redirect('admin');
+            }
+            else{
+                echo "Data tidak ditemukan";
+            } 
+        }
+        catch(\Exception $e){
+            $e->getMessage();
+        }
+
     }
 }

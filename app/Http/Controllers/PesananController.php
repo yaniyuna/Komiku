@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Komik;
+use App\Models\Pesanan;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PesananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +17,13 @@ class UserController extends Controller
     {
         //
 
-        $title = 'Data User';
-        $users = User::all();
+        $title = 'Data Pesanan';
+        $pesanans = new Pesanan;
+        $komiks = Komik::all();
+        $transaksis = Transaksi::all();
         // $users = User::paginate(2);
         
-        return view('BackPage.dataUser', compact('title', 'users' ));
+        return view('admin.dataPesanan', compact('title', 'pesanans', 'komiks', 'transaksis' ));
         
     }
 
@@ -28,9 +33,9 @@ class UserController extends Controller
     public function create()
     {
         //
-        $title = "Input User";
-        $users = User::all();
-        return view('BackPage.tambahUser', compact('title', 'users'));
+        $title = "Input Pesanan";
+        $pesanans = Pesanan::all();
+        return view('admin.tambahPesanan', compact('title', 'pesanans'));
     }
 
     /**
@@ -39,6 +44,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        
+
     }
 
     /**

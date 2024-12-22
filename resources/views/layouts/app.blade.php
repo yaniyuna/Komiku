@@ -31,7 +31,7 @@
 
             <!-- Page Content -->
             <main>
-                @if (auth()->check())
+                {{-- @if (auth()->check())
                         @if (auth()->user()->role === 'admin')
                             <div class="p-4 bg-blue-100 text-blue-800">
                                 {{ __('Welcome, Admin!') }}
@@ -41,11 +41,11 @@
                                 {{ __('Welcome, User!') }}
                             </div>
                         @endif
-                    @endif
+                    @endif --}}
                     
                  {{ $slot }}
                 
-                {{-- {{ $slot }} --}}
+                {{ $slot }}
             </main>
         </div>
     </body>

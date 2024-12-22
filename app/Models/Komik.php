@@ -11,7 +11,7 @@ class Komik extends Model
 
     public $primaryKey = 'id_komik';
     protected $fillable = [
-        'judul', 'penulis', 'kategori', 'thn_terbit', 'sinopsis', 'harga', 'stok', 'feature_img'
+        'judul', 'penulis', 'kategori', 'thn_terbit', 'sinopsis', 'harga', 'stok', 'sinopsis', 'feature_img'
     ];
 
     public function pesanans()
