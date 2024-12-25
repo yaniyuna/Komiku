@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     use HasFactory;
+    protected $table = 'transaksis';
     public $primaryKey = 'id_transaksi';
 
     protected $fillable = [
@@ -21,6 +22,6 @@ class Transaksi extends Model
 
     public function pesanan()
     {
-        return $this->hasMany(Pesanan::class, 'id_pesanan', 'id_pesanan');
+        return $this->hasMany(Pesanan::class, 'id_transaksi', 'id_transaksi');
     }
 }

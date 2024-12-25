@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('judul');
             $table->string('penulis');
             $table->string('kategori');
-            $table->dateTime('thn_terbit');
+            $table->integer('thn_terbit');
             $table->text('sinopsis');
             $table->decimal('harga');
             $table->integer('stok');
-            $table->string('feature_img');
+            $table->string('feature_img')->nullable();
             $table->timestamps();
         });
     }

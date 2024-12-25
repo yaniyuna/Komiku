@@ -2,10 +2,13 @@
     <h2 class="text-xl font-bold mb-4">
         {{$title}}
     </h2>
-    <script src="{{asset('assets/js/admin.js')}}"></script>
+    {{-- <script src="{{ asset('assets/js/Admin.js')}}"></script> --}}
+
+    <button id="toggleForm" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        <a href="{{ route('admin.create') }}">Tambah Komik</a>
+    </button>
 
     <div class="bg-white shadow-md rounded-lg p-6">
-        {{-- <h3 class="text-xl font-bold mb-4">Data Komiku</h3> --}}
         <table class="table-auto w-full text-left border-collapse">
             <thead>
                 <tr class="bg-gray-200">
@@ -24,18 +27,51 @@
             <tbody>
                 @foreach ($komiks as $item )
                     <tr class="border-b">
-                        <td class="px-4 py-2">{{ $item->id_komik }}</td>
-                        <td class="px-4 py-2">{{ $item->judul }}</td>
-                        <td class="px-4 py-2">{{ $item->penulis }}</td>
-                        <td class="px-4 py-2">{{ $item->kategori }}</td>
-                        <td class="px-4 py-2">{{ $item->thn_terbit }}</td>
-                        <td class="px-4 py-2">{{ $item->sinopsis }}</td>
-                        <td class="px-4 py-2">{{ $item->harga }}</td>
-                        <td class="px-4 py-2">{{ $item->stok }}</td>
                         <td class="px-4 py-2">
-                            <img src="{{ asset($item->feature_img) }}" alt="" class="w-16 h-16 object-cover">
+                            <div class="text-sm font-medium text-gray-900">
+                                {{$item->id_komik}}
+                            </div>
                         </td>
-
+                        <td class="px-4 py-2">
+                            <div class="text-sm font-medium text-gray-900">
+                                {{$item->judul}}
+                            </div>
+                        </td>
+                        <td class="px-4 py-2">
+                            <div class="text-sm font-medium text-gray-900">
+                                {{$item->penulis}}
+                            </div>
+                        </td>
+                        <td class="px-4 py-2">
+                            <div class="text-sm font-medium text-gray-900">
+                                {{$item->kategori}}
+                            </div>
+                        </td>
+                        <td class="px-4 py-2">
+                            <div class="text-sm font-medium text-gray-900">
+                                {{$item->thn_terbit}}
+                            </div>
+                        </td>
+                        <td class="px-4 py-2">
+                            <div class="text-sm font-medium text-gray-900">
+                                {{$item->sinopsis}}
+                            </div>
+                        </td>
+                        <td class="px-4 py-2">
+                            <div class="text-sm font-medium text-gray-900">
+                                {{$item->harga}}
+                            </div>
+                        </td>
+                        <td class="px-4 py-2">
+                            <div class="text-sm font-medium text-gray-900">
+                                {{$item->stok}}
+                            </div>
+                        </td>
+                        <td class="px-4 py-2">
+                            <div class="text-sm font-medium text-gray-900">
+                                <img src="{{ asset($item->feature_img) }}" alt="" class="w-16 h-16 object-cover">
+                            </div>
+                        </td>
 
                         <td class="px-4 py-2 text-center">
                             <div class="flex justify-center space-x-2">
@@ -52,9 +88,6 @@
                 @endforeach
             </tbody>
         </table>
-        <button id="toggleForm" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-            <a href="{{ route('admin.create') }}">Tambah Komik</a>
-        </button>
     </div>
 
     {{-- <div class="m-4">{{ $komiks->links() }}</div> --}}

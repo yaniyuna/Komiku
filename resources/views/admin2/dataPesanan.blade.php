@@ -2,11 +2,11 @@
     <h2 class="text-xl font-bold mb-4">
         {{$title}}
     </h2>
-    <script src="{{asset('assets/js/admin.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/admin.js')}}"></script> --}}
 
     <div class="col-span-6 p-4">
         <button id="toggleForm" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-            <a href="{{ route('admin.create') }}">Tambah User</a> 
+            <a href="{{ route('admin2.create') }}">Tambah</a> 
         </button>
     </div>
 
@@ -16,7 +16,7 @@
                 <thead>
                     <tr class="bg-gray-200">
                         <th class="px-4 py-2">ID Pesanan</th>
-                        <th class="px-4 py-2">Judul Komik</th>
+                        <th class="px-4 py-2">ID Komik</th>
                         <th class="px-4 py-2">ID Transaksi</th>
                         <th class="px-4 py-2">Kuantitas</th>
                         <th class="px-4 py-2">Subtotal</th>
@@ -27,23 +27,46 @@
                 <tbody>
                     @foreach ($pesanans as $item )
                         <tr class="border-b">
-                            <td class="px-4 py-2">{{ $item->id_pesanan }}</td>
-                            <td>
-                                <div class="text-sm text-gray-500">
-                                    <a href="{{ route('package.author', $item->author->author_id) }}">{{ $item->author->author_name }}</a>
+                            <td class="px-4 py-2">
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{$item->id_pesanan}}
                                 </div>
                             </td>
                             <td>
                                 <div class="text-sm text-gray-500">
-                                    <a href="{{ route('package.author', $item->author->author_id) }}">{{ $item->author->author_name }}</a>
+                                    <a href="{{ route('pesanans.komik', $item->komik->id_komik) }}">{{ $item->komik->id_komik }}</a>
                                 </div>
                             </td>
-                            <td class="px-4 py-2">{{ $item->kuantitas }}</td>
-                            <td class="px-4 py-2">{{ $item->subtotal }}</td>
-                            <td class="px-4 py-2">{{ $item->created_at }}</td>
+                            <td>
+                                <div class="text-sm text-gray-500">
+                                    <a href="{{ route('pesanans.transaksi', $item->transaksi->id_transaksi) }}">{{ $item->transaksi->id_transaksi }}</a>
+                                </div>
+                            </td>
+                            <td class="px-4 py-2">
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{$item->kuantitas}}
+                                </div>
+                            </td>
+                            <td class="px-4 py-2">
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{$item->subtotal}}
+                                </div>
+                            </td>
+                            <td class="px-4 py-2">
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{$item->created_at}}
+                                </div>
+                            </td>
                             <td class="px-4 py-2 text-center">
-                                <button class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600">Edit</button>
-                                <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</button>
+                                <div class="flex justify-center space-x-2">
+                                    <form action="{{ route('admin2.destroy', $item->id_pesanan) }}" method="POST">
+                                        @csrf @method('DELETE')
+                                        <button class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600">
+                                            <a href="{{ route('admin2.edit', $item->id_pesanan) }}">Edit</a>
+                                        </button>
+                                        <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600" onclick="return confirm('Anda Yakin?')" type="submit">Delete</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>  
                     @endforeach
